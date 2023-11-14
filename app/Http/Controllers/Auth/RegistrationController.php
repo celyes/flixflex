@@ -19,8 +19,11 @@ class RegistrationController extends Controller
      */
     public function __invoke(RegisterUserRequest $request): mixed
     {
-        // We could certainly send a verification email but that's beyond the scope of this test...
+
         $user = User::create($request->validated());
+
+        // We could certainly send a verification email but that's beyond the scope of this test...
+        $user->markEmailAsVerified();
 
         $token = $user->createToken($user->name);
 
