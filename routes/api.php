@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Auth\RegistrationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,6 @@ Route::prefix('/v1')->group(function () {
     // Authentication route group
     Route::group(['prefix' => '/auth', 'as' => 'auth.'], function () {
         Route::post('/register', RegistrationController::class)->name('register');
+        Route::post('/login', AuthenticationController::class)->name('login');
     });
 });
