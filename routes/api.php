@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\LogoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,9 @@ Route::prefix('/v1')->group(function () {
     Route::group(['prefix' => '/auth', 'as' => 'auth.'], function () {
         Route::post('/register', RegistrationController::class)->name('register');
         Route::post('/login', AuthenticationController::class)->name('login');
+
+        Route::middleware('auth:sanctum')->group(function () {
+           Route::post('logout', LogoutController::class)->name('login');
+        });
     });
 });
