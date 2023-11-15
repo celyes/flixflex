@@ -26,7 +26,7 @@ php artisan serve
 
 You can check all the endpoints using this Postman collection:
 
-[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://www.postman.com/flixflex/workspace/flixflex/collection/31183614-15645d0a-aa88-41dc-bb53-14ba64253796)
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://www.postman.com/flixflex/workspace/flixflex/collection/31183614-15645d0a-aa88-41dc-bb53-14ba64253796?action=share&creator=29300535)
 
 <p style="color:#f63;font-weight: bold">Important notice!<br><br>
 All the requirements outlined in the user stories are covered in the examples of Postman.
