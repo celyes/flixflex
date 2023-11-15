@@ -27,8 +27,7 @@ class RegistrationController extends Controller
 
         $token = $user->createToken($user->name);
 
-        return response()->json([
-            'success' => true,
+        return $this->success([
             'user' => $user,
             'auth_token' => $token->plainTextToken
         ], 201);
