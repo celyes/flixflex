@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Movies;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\FavourizeMovieRequest;
 use App\Http\Requests\UnFavourizeMovieRequest;
 use App\Http\Resources\MovieResource;
@@ -48,6 +49,7 @@ class MoviesController extends Controller
     public function search(Request $request): ResourceCollection
     {
         $query = $request->get('query');
+        $per_page = $request->get('per_page', 25);
 
         if (!$query) {
             return $this->index($request);
@@ -55,11 +57,12 @@ class MoviesController extends Controller
 
         $movies = Movie::where('title', 'ILIKE', "%$query%")
             ->orWhere('plot', 'LIKE', "%$query%")
-            ->get();
+            ->simplePaginate($per_page);
+
         return new MoviesResourceCollection($movies);
     }
 
-    public function favourites(Request $request)
+    public function favourites(Request $request): ResourceCollection
     {
         $per_page = $request->get('per_page', 25);
 
@@ -70,7 +73,7 @@ class MoviesController extends Controller
         );
     }
 
-    public function favourize(FavourizeMovieRequest $request): mixed
+    public function favourize(FavourizeMovieRequest $request): JsonResponse
     {
         try {
             $request->user()->favouriteMovies()->attach(['movie_id' => $request->movie_id]);

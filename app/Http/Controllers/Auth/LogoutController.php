@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use http\Env\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LogoutController extends Controller
