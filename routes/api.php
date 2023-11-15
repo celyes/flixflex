@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
-use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\Movies\MoviesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,12 +29,12 @@ Route::prefix('/v1')->group(function () {
         });
     });
 
-    Route::group(['prefix' => '/movies', 'as' => 'movies.', 'middleware' => 'auth:sanctum'], function () {
+    // Movies route group
+    Route::group(['prefix' => 'movies', 'as' => 'movies.', 'middleware' => 'auth:sanctum'], function () {
         Route::get('/', [MoviesController::class, 'index'])->name('index');
-        Route::get('/{movie}', [MoviesController::class, 'show'])->name('show');
+        Route::get('/favourites', [MoviesController::class, 'favourites']);
+        Route::get('/search', [MoviesController::class, 'search']);Route::get('/{movie}', [MoviesController::class, 'show'])->name('show');
         Route::get('/{movie}/trailer', [MoviesController::class, 'showTrailer'])->name('show');
-        Route::get('/search', [MoviesController::class, 'search'])->name('search');
-        Route::get('/favourites', [MoviesController::class, 'favourites'])->name('favourites');
         Route::post('/favourites/{movieId}', [MoviesController::class, 'favourize'])->name('favourites.add');
         Route::delete('/favourites/{movieId}', [MoviesController::class, 'unfavourize'])->name('favourites.remove');
     });
