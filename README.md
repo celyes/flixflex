@@ -28,11 +28,14 @@ You can check all the endpoints using this Postman collection:
 
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://www.postman.com/flixflex/workspace/flixflex/collection/31183614-15645d0a-aa88-41dc-bb53-14ba64253796?action=share&creator=29300535)
 
-<p style="color:#f63;font-weight: bold">Important notice!<br><br>
-All the requirements outlined in the user stories are covered in the examples of Postman.
-For example, to get the top 5 movies, you can use the list movies endpoint (<code>GET /movies</code>).
-Also, to get the movies in batches of 10 but with different parameters, you can use the same endpoint.<br><br> All the use cases are covered in the examples of each request!
-</p>
+
+> [!warning]  
+> All the requirements outlined in the user stories are covered in the examples of Postman.
+>
+> For example, to get the top 5 movies, you can use the list movies endpoint (<code>GET /movies</code>).
+>
+>
+> Also, to get the movies in batches of 10, You can use the same endpoint but with different query parameters.
 
 
 All endpoints need API tokens to work. To get an API token, make a request to `/auth/register` or `/auth/login` endpoints (if you already have an account)
