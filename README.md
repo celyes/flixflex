@@ -42,8 +42,12 @@ All endpoints need API tokens to work. To get an API token, make a request to `/
 
 Once the API token is obtained, you can use it as A bearer token to make subsequent requests.
 ### Questions and technical decisions
+
 - **Question:** When using the trailers endpoint (`/movies/`), Why can't I watch the trailer directly?
-- **Answer:** Front-ends usually make requests using AJAX. This means that it's better to return the response as JSON first. You can find the link to the trailer on YouTube but in real-world scenarios, we should return the link from our platform and let the front-end handle it accordingly (if this is the requirement).
+- **Answer:** Front-ends usually make requests using AJAX. This means that it's better to return the response as JSON first. You can find the link to the trailer on YouTube but in real-world scenarios, we can respond with the link from our platform servers (not necessarily the API but it can be our streaming for example)  and let the front-end handle it accordingly (if this is the requirement).
+
+
+----------------------
 
 
 - **Question:** Why not implement email verification?
@@ -52,8 +56,21 @@ Once the API token is obtained, you can use it as A bearer token to make subsequ
   2. It's not required by the user stories in the given PDF.
 
 
+----------------------
+
+
+- **Question:** What data source did you use?
+- **Answer:** For the sake of illustration, I picked up a sample of 20 movies from OMDB (Open Movie Database). 20 movies are enough to give examples of the application's pagination functionality as well as other functions. I also studied using TMDB but they require you to submit a request and wait which meant wasted time. Wasting time is the last thing one wants to do in this case. 
+
+
+----------------------
+
+
 - **Question:** Why not implement different endpoints for getting the top movies and all movies?
 - **Answer:** This will result in more unnecessary code. Besides, we can offer both functionalities and way more using the same endpoint by making use of query parameters as you can see in the Postman examples of `list movies` endpoint. 
+
+
+----------------------
 
 
 - **Question:** Why not use JWT tokens?
