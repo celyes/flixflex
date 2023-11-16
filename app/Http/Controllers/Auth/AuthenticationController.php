@@ -21,10 +21,9 @@ class AuthenticationController extends Controller
      */
     public function __invoke(AuthenticateUserRequest $request): JsonResponse
     {
-        $user = User::where('email', $request->username_or_email)
-            ->orWhere('username', $request->username_or_email)->first();
+        $user = $this->getAssociatedUser($request->username_or_email);
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !$this->checkPassword($user->password, $request->password)) {
             abort(403, 'Username, email or password is incorrect. Please try again.');
         }
 
@@ -34,5 +33,16 @@ class AuthenticationController extends Controller
             'user' => $user,
             'auth_token' => $token->plainTextToken
         ]);
+    }
+
+    protected function getAssociatedUser(string $username_or_email): ?User
+    {
+        return User::where('email', $username_or_email)
+            ->orWhere('username', $username_or_email)
+            ->first();
+    }
+    protected function checkPassword(string $userPassword, string $givenPassword): bool
+    {
+        return Hash::check($givenPassword, $userPassword);
     }
 }

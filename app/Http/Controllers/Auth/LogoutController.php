@@ -20,9 +20,6 @@ class LogoutController extends Controller
         if (!$request->user()->currentAccessToken()->delete()) {
             abort(400, "Could not revoke current token. Please try again.");
         }
-        return response()->json([
-            "success" => true,
-            "message" => "Token revoked successfully."
-        ]);
+        return $this->success("Token revoked successfully");
     }
 }

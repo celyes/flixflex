@@ -36,16 +36,36 @@ class MoviesController extends Controller
         );
     }
 
+    /**
+     * Show details of a movie
+     *
+     * @param Request $request
+     * @param Movie $movie
+     * @return JsonResource
+     */
     public function show(Request $request, Movie $movie): JsonResource
     {
         return new MovieResource($movie);
     }
 
+    /**
+     * Show trailer of a movie
+     *
+     * @param Request $request
+     * @param Movie $movie
+     * @return JsonResource
+     */
     public function showTrailer(Request $request, Movie $movie): JsonResource
     {
         return new MovieTrailerResource($movie);
     }
 
+    /**
+     * Search movies
+     *
+     * @param Request $request
+     * @return ResourceCollection
+     */
     public function search(Request $request): ResourceCollection
     {
         $query = $request->get('query');
@@ -62,6 +82,12 @@ class MoviesController extends Controller
         return new MoviesResourceCollection($movies);
     }
 
+    /**
+     * List user favourite movies
+     *
+     * @param Request $request
+     * @return ResourceCollection
+     */
     public function favourites(Request $request): ResourceCollection
     {
         $per_page = $request->get('per_page', 25);
@@ -73,6 +99,12 @@ class MoviesController extends Controller
         );
     }
 
+    /**
+     * Add a movie to the user's favourites list
+     *
+     * @param FavourizeMovieRequest $request
+     * @return JsonResponse
+     */
     public function favourize(FavourizeMovieRequest $request): JsonResponse
     {
         try {
@@ -83,6 +115,12 @@ class MoviesController extends Controller
         }
     }
 
+    /**
+     * Remove a movie from the user's favourites list
+     *
+     * @param UnFavourizeMovieRequest $request
+     * @return JsonResponse
+     */
     public function unfavourize(UnFavourizeMovieRequest $request): JsonResponse
     {
         try {
@@ -107,9 +145,6 @@ class MoviesController extends Controller
         if (!$rank_by || !in_array($rank_by[1] ?? null, ['asc', 'desc'])) {
             $rank_by[] = 'desc';
         }
-
         return $rank_by;
     }
-
-
 }
